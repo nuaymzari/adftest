@@ -16,7 +16,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"url": "https://webhook.site/ada5a527-c60f-4f19-8af1-1edef1122db7",
-					"method": "GET"
+					"method": "POST",
+					"body": {
+						"value": "@pipeline().parameters.filename",
+						"type": "Expression"
+					}
 				}
 			}
 		],
