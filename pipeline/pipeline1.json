@@ -13,7 +13,11 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://webhook.site/ada5a527-c60f-4f19-8af1-1edef1122db7",
+					"method": "POST"
+				}
 			}
 		],
 		"annotations": []
