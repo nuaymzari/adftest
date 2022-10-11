@@ -11,6 +11,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
 		},
+		"trigger2_properties_pipeline2_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
 		"trigger2_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
@@ -73,14 +77,23 @@
 						"userProperties": [],
 						"typeProperties": {
 							"url": "https://webhook.site/ada5a527-c60f-4f19-8af1-1edef1122db7",
-							"method": "GET",
-							"headers": {}
+							"method": "POST",
+							"headers": {},
+							"body": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
 						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
 				},
 				"annotations": []
 			},
@@ -129,7 +142,9 @@
 							"referenceName": "pipeline2",
 							"type": "PipelineReference"
 						},
-						"parameters": {}
+						"parameters": {
+							"filename": "[parameters('trigger2_properties_pipeline2_parameters_filename')]"
+						}
 					}
 				],
 				"type": "BlobEventsTrigger",
