@@ -1,0 +1,12 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "nzfactory"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"value": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
+		}
+	}
+}
