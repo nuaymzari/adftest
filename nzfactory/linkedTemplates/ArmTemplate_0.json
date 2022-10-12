@@ -11,10 +11,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
 		},
-		"trigger2_properties_pipeline2_parameters_filename": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
 		"trigger2_properties_pipeline3_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
@@ -129,7 +125,7 @@
 							{
 								"activity": "varFilename",
 								"dependencyConditions": [
-									"Skipped"
+									"Succeeded"
 								]
 							}
 						],
@@ -242,15 +238,6 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "pipeline2",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"filename": "[parameters('trigger2_properties_pipeline2_parameters_filename')]"
-						}
-					},
-					{
-						"pipelineReference": {
 							"referenceName": "pipeline3",
 							"type": "PipelineReference"
 						},
@@ -270,7 +257,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline2')]",
 				"[concat(variables('factoryId'), '/pipelines/pipeline3')]"
 			]
 		}
