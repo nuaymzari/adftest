@@ -15,6 +15,10 @@
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
 		},
+		"trigger2_properties_pipeline3_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
 		"trigger2_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
@@ -51,6 +55,9 @@
 					},
 					"trigger2_properties_pipeline2_parameters_filename": {
 						"value": "[parameters('trigger2_properties_pipeline2_parameters_filename')]"
+					},
+					"trigger2_properties_pipeline3_parameters_filename": {
+						"value": "[parameters('trigger2_properties_pipeline3_parameters_filename')]"
 					},
 					"trigger2_properties_typeProperties_scope": {
 						"value": "[parameters('trigger2_properties_typeProperties_scope')]"
