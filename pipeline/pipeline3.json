@@ -1,0 +1,11 @@
+{
+	"name": "pipeline3",
+	"properties": {
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
