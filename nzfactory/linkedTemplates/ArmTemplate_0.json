@@ -265,7 +265,7 @@
 						"typeProperties": {
 							"variableName": "letters",
 							"value": {
-								"value": "@split(variables('varfn'),'.')",
+								"value": "@split(variables('varfn'),'')",
 								"type": "Expression"
 							}
 						}
