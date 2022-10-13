@@ -6,11 +6,17 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "pipeline3",
+					"referenceName": "pipeline3 if_then",
 					"type": "PipelineReference"
 				},
 				"parameters": {
 					"filename": "@triggerBody().fileName"
+				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline4 loop",
+					"type": "PipelineReference"
 				}
 			}
 		],

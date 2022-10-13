@@ -1,0 +1,11 @@
+{
+	"name": "pipeline4 loop",
+	"properties": {
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
