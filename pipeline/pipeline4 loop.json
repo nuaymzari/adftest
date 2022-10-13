@@ -1,9 +1,53 @@
 {
 	"name": "pipeline4 loop",
 	"properties": {
+		"activities": [
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "varfn",
+					"value": {
+						"value": "@pipeline().parameters.filename",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Set variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://webhook.site/ada5a527-c60f-4f19-8af1-1edef1122db7",
+					"method": "GET"
+				}
+			}
+		],
 		"parameters": {
 			"filename": {
 				"type": "string"
+			}
+		},
+		"variables": {
+			"varfn": {
+				"type": "String"
 			}
 		},
 		"annotations": []
