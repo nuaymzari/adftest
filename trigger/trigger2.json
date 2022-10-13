@@ -17,6 +17,9 @@
 				"pipelineReference": {
 					"referenceName": "pipeline4 loop",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"filename": "@triggerBody().fileName"
 				}
 			}
 		],
