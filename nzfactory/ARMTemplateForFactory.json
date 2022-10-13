@@ -11,10 +11,6 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
 		},
-		"trigger2_properties_pipeline3 if_then_parameters_filename": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
 		"trigger2_properties_pipeline4 loop_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
@@ -346,15 +342,7 @@
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
+				"pipelines": [],
 				"type": "BlobEventsTrigger",
 				"typeProperties": {
 					"blobPathBeginsWith": "/landing/blobs/",
@@ -365,9 +353,7 @@
 					]
 				}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger2')]",
@@ -377,15 +363,6 @@
 				"annotations": [],
 				"runtimeState": "Started",
 				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pipeline3 if_then",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"filename": "[parameters('trigger2_properties_pipeline3 if_then_parameters_filename')]"
-						}
-					},
 					{
 						"pipelineReference": {
 							"referenceName": "pipeline4 loop",
@@ -407,7 +384,6 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline3 if_then')]",
 				"[concat(variables('factoryId'), '/pipelines/pipeline4 loop')]"
 			]
 		}
