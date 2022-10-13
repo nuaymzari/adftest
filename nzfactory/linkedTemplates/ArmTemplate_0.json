@@ -11,7 +11,11 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/943c55f1-b171-4c2d-aa4f-72fcf1ae8949/resourceGroups/nzlearn/providers/Microsoft.Storage/storageAccounts/nzstorage"
 		},
-		"trigger2_properties_pipeline3_parameters_filename": {
+		"trigger2_properties_pipeline3 if_then_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"trigger2_properties_pipeline4 loop_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@triggerBody().fileName"
 		},
@@ -100,7 +104,7 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline3')]",
+			"name": "[concat(parameters('factoryName'), '/pipeline3 if_then')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -199,6 +203,69 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/pipeline4 loop')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "varfn",
+							"value": {
+								"value": "@pipeline().parameters.filename",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "Set variable1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"url": "https://webhook.site/ada5a527-c60f-4f19-8af1-1edef1122db7",
+							"method": "GET",
+							"headers": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"variables": {
+					"varfn": {
+						"type": "String"
+					}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/trigger1')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -234,15 +301,24 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "pipeline3",
+							"referenceName": "pipeline3 if_then",
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"filename": "[parameters('trigger2_properties_pipeline3_parameters_filename')]"
+							"filename": "[parameters('trigger2_properties_pipeline3 if_then_parameters_filename')]"
+						}
+					},
+					{
+						"pipelineReference": {
+							"referenceName": "pipeline4 loop",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"filename": "[parameters('trigger2_properties_pipeline4 loop_parameters_filename')]"
 						}
 					}
 				],
@@ -257,7 +333,8 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline3')]"
+				"[concat(variables('factoryId'), '/pipelines/pipeline3 if_then')]",
+				"[concat(variables('factoryId'), '/pipelines/pipeline4 loop')]"
 			]
 		}
 	]
