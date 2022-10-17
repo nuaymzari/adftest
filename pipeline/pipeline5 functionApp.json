@@ -1,0 +1,11 @@
+{
+	"name": "pipeline5 functionApp",
+	"properties": {
+		"parameters": {
+			"file": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}

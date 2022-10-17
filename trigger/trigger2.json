@@ -12,6 +12,15 @@
 				"parameters": {
 					"filename": "@triggerBody().fileName"
 				}
+			},
+			{
+				"pipelineReference": {
+					"referenceName": "pipeline5 functionApp",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"file": "@triggerBodu().fileName"
+				}
 			}
 		],
 		"type": "BlobEventsTrigger",
