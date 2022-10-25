@@ -3,12 +3,6 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Set variable1",
-				"type": "SetVariable",
-				"dependsOn": [],
-				"userProperties": []
-			},
-			{
 				"name": "Azure Function1",
 				"type": "AzureFunctionActivity",
 				"dependsOn": [],
@@ -19,14 +13,44 @@
 					"secureOutput": false,
 					"secureInput": false
 				},
-				"userProperties": []
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "Doubler",
+					"method": "GET"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureFunction1",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"number": "7"
+					}
+				}
+			},
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "Azure Function1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://webhook.site/a1b28a6b-6408-4491-9329-7cb465f5362e",
+					"method": "GET"
+				}
 			}
 		],
-		"parameters": {
-			"file": {
-				"type": "string"
-			}
-		},
 		"variables": {
 			"number": {
 				"type": "String"
